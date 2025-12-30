@@ -4,7 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "node scripts/copy-tokens.js && node scripts/build-modules.js"
+    "build": "node scripts/copy-tokens.js && node scripts/build-modules.js",
+    "validate": "node scripts/validate.js",
+    "prebuild": "node scripts/validate.js"
   },
   "dependencies": {
     "@huble/ui": "workspace:*",

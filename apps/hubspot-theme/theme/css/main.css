@@ -1,6 +1,9 @@
 /* Import design tokens */
 @import './tokens.css';
 
+/* Import component fallback styles */
+@import './components.css';
+
 /* Base styles */
 *,
 *::before,

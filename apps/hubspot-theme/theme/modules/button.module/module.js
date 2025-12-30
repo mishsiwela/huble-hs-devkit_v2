@@ -1,4 +1,4 @@
-// Island hydration script
+// Island hydration script for Button component
 import { Button } from '@huble/ui';
 import { createRoot } from 'react-dom/client';
 
@@ -7,6 +7,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   containers.forEach((container) => {
     const props = JSON.parse(container.dataset.props || '{}');
+    const href = container.dataset.href;
+
+    // Add onClick handler if href is provided
+    if (href) {
+      props.onClick = () => {
+        window.location.href = href;
+      };
+    }
+
+    // Hydrate the island
     const root = createRoot(container);
     root.render(<Button {...props} />);
   });

@@ -31,9 +31,14 @@ async function buildModules() {
           format: 'iife',
           target: 'es2020',
           minify: true,
-          external: ['react', 'react-dom'], // These come from CDN or global bundle
+          // Bundle UI components, but external React/ReactDOM (loaded globally)
+          external: ['react', 'react-dom'],
           loader: { '.js': 'jsx' },
           jsx: 'automatic',
+          // Map workspace packages to their built versions
+          alias: {
+            '@huble/ui': path.resolve(__dirname, '../../../packages/ui/dist/index.js'),
+          },
         });
 
         console.log(`✅ Built ${moduleName}`);

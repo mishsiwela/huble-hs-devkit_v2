@@ -7,7 +7,6 @@
 
   <!-- Design tokens and styles -->
   {{ standard_header_includes }}
-  <link rel="stylesheet" href="{{ get_asset_url('./css/tokens.css') }}">
   <link rel="stylesheet" href="{{ get_asset_url('./css/main.css') }}">
 </head>
 <body>
@@ -29,7 +28,10 @@
   <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 
-  <!-- Module scripts -->
+  <!-- Islands hydration system -->
+  <script src="{{ get_asset_url('./js/islands.js') }}"></script>
+
+  <!-- Module bundle scripts (loaded by HubSpot) -->
   {{ standard_footer_includes }}
 </body>
 </html>
