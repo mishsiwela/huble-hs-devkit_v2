@@ -8,6 +8,7 @@
     "huble-generate": "./src/cli.js"
   },
   "scripts": {
+    "generate:macros": "node src/generate-macros.js",
     "test": "echo \"Add tests later\""
   },
   "dependencies": {

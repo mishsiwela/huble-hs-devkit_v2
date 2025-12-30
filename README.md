@@ -12,8 +12,9 @@ The Huble HubSpot CMS Developer Kit is a production-ready framework that bridges
 
 - **🎨 Design Token System** - Single source of truth for colors, spacing, typography
 - **🏝️ Islands Architecture** - Server-rendered by default, hydrate only where needed
-- **♻️ Zero Duplication** - React components mapped to HubSpot modules via thin adapters
+- **♻️ TRUE Zero Duplication** - React components auto-generate HubL macros via build-time SSR
 - **⚛️ Atomic Design** - Organized component library (atoms → molecules → organisms)
+- **🤖 Automated Workflow** - Macros regenerate automatically on every build
 - **🎯 Multi-Brand Support** - Scale across brands by swapping token files
 - **⚡ Developer Experience** - localhost:3000 preview with zero HubSpot dependency
 - **📊 Performance Optimized** - Core Web Vitals targets (LCP < 2.5s, FID < 100ms, CLS < 0.1)
@@ -49,8 +50,11 @@ pnpm run preview
 # Start Storybook (localhost:6006)
 pnpm run storybook
 
-# Build for HubSpot
+# Build for HubSpot (auto-generates macros)
 pnpm run build:theme
+
+# Regenerate HubL macros from React components
+pnpm run generate:macros
 ```
 
 ## 📁 Project Structure

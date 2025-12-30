@@ -6,7 +6,7 @@
   "scripts": {
     "build": "node scripts/copy-tokens.js && node scripts/build-modules.js",
     "validate": "node scripts/validate.js",
-    "prebuild": "node scripts/validate.js"
+    "prebuild": "pnpm --filter build-tools generate:macros && node scripts/validate.js"
   },
   "dependencies": {
     "@huble/ui": "workspace:*",

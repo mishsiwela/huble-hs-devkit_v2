@@ -9,6 +9,7 @@
     "build:tokens": "pnpm --filter design-tokens build",
     "build:ui": "pnpm --filter ui build",
     "build:theme": "pnpm --filter hubspot-theme build",
+    "generate:macros": "pnpm --filter build-tools generate:macros",
     "preview": "pnpm --filter local-preview dev",
     "storybook": "pnpm --filter storybook dev",
     "lint": "turbo run lint",
