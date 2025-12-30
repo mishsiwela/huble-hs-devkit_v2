@@ -18,16 +18,16 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         primary: [
-          'bg-blue-600',
+          'bg-primary-600',
           'text-white',
-          'hover:bg-blue-700',
-          'focus:ring-blue-600',
+          'hover:bg-primary-700',
+          'focus:ring-primary-600',
         ],
         secondary: [
-          'bg-purple-600',
+          'bg-secondary-600',
           'text-white',
-          'hover:bg-purple-700',
-          'focus:ring-purple-600',
+          'hover:bg-secondary-700',
+          'focus:ring-secondary-600',
         ],
         outline: [
           'border-2',
