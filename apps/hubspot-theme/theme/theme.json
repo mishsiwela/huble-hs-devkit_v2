@@ -9,19 +9,5 @@
   "screenshot_path": "./images/screenshot.png",
   "template_path": "./templates",
   "css_path": "./css",
-  "js_path": "./js",
-  "responsive_breakpoints": [
-    {
-      "name": "mobile",
-      "mediaQuery": "(max-width: 767px)"
-    },
-    {
-      "name": "tablet",
-      "mediaQuery": "(min-width: 768px) and (max-width: 1023px)"
-    },
-    {
-      "name": "desktop",
-      "mediaQuery": "(min-width: 1024px)"
-    }
-  ]
+  "js_path": "./js"
 }

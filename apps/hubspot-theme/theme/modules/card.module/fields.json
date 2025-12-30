@@ -28,7 +28,7 @@
     "label": "Card Content",
     "required": false,
     "locked": false,
-    "type": "rich_text",
+    "type": "richtext",
     "default": "<p>Card content goes here...</p>"
   },
   {

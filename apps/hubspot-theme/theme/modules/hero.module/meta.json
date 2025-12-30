@@ -1,6 +1,6 @@
 {
   "label": "Hero Section",
-  "host_template_types": ["PAGE", "LANDING_PAGE"],
+  "host_template_types": ["PAGE", "BLOG_POST", "BLOG_LISTING"],
   "icon": "🎯",
   "is_available_for_new_content": true,
   "description": "Hero section with heading, description, and optional image"

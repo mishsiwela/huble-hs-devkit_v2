@@ -6,11 +6,11 @@
 
 {# Render Button component directly - same atoms/molecules used in React #}
 {{ components.Button({
-  label: module.label,
-  children: module.label,
+  label: module.button_text,
+  children: module.button_text,
   variant: module.variant,
   size: module.size,
   fullWidth: module.full_width,
-  href: module.href,
+  href: module.href.url.href,
   interactive: false
 }) }}

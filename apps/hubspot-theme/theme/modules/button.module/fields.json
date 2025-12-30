@@ -1,8 +1,8 @@
 [
   {
-    "id": "label",
-    "name": "label",
-    "label": "Button Label",
+    "id": "button_text",
+    "name": "button_text",
+    "label": "Button Text",
     "required": true,
     "locked": false,
     "type": "text",
@@ -53,7 +53,12 @@
     "label": "Link URL",
     "required": false,
     "locked": false,
-    "type": "url",
-    "default": "#"
+    "type": "link",
+    "default": {
+      "url": {
+        "href": "",
+        "type": "EXTERNAL"
+      }
+    }
   }
 ]
