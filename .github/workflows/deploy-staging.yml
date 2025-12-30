@@ -1,0 +1,46 @@
+name: Deploy to Staging
+
+on:
+  push:
+    branches: [staging]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: staging
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build design tokens
+        run: pnpm run build:tokens
+
+      - name: Build UI package
+        run: pnpm --filter ui build
+
+      - name: Build HubSpot theme
+        run: pnpm --filter hubspot-theme build
+
+      - name: Upload to HubSpot Staging
+        env:
+          HUBSPOT_API_KEY: ${{ secrets.HUBSPOT_STAGING_API_KEY }}
+        run: |
+          npm install -g @hubspot/cli
+          cd apps/hubspot-theme
+          hs upload theme --portal=${{ secrets.HUBSPOT_STAGING_PORTAL_ID }}

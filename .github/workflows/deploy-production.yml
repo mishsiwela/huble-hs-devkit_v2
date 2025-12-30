@@ -1,0 +1,47 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build all packages
+        run: pnpm run build
+
+      - name: Upload to HubSpot Production
+        env:
+          HUBSPOT_API_KEY: ${{ secrets.HUBSPOT_PROD_API_KEY }}
+        run: |
+          npm install -g @hubspot/cli
+          cd apps/hubspot-theme
+          hs upload theme --portal=${{ secrets.HUBSPOT_PROD_PORTAL_ID }}
+
+      - name: Create deployment tag
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git tag -a "deploy-$(date +'%Y%m%d-%H%M%S')" -m "Production deployment"
+          git push origin --tags
