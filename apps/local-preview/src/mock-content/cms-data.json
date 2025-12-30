@@ -1,0 +1,62 @@
+{
+  "hero": {
+    "heading": "Welcome to Huble Developer Kit",
+    "description": "Modern HubSpot development with React, design tokens, and islands architecture. Build fast, scalable, multi-brand websites with confidence.",
+    "primaryCta": {
+      "label": "Get Started",
+      "href": "#features"
+    },
+    "secondaryCta": {
+      "label": "View Documentation",
+      "href": "#docs"
+    },
+    "imageSrc": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop",
+    "imageAlt": "Developer working on code"
+  },
+  "features": [
+    {
+      "title": "Design Tokens",
+      "description": "Single source of truth for visual design. Compile to CSS custom properties and TypeScript constants.",
+      "icon": "🎨"
+    },
+    {
+      "title": "Islands Architecture",
+      "description": "Fast loading with minimal JavaScript. Server-rendered by default, hydrate only where needed.",
+      "icon": "🏝️"
+    },
+    {
+      "title": "Zero Duplication",
+      "description": "React components are mapped to HubSpot modules via thin adapters. Write UI logic once.",
+      "icon": "♻️"
+    },
+    {
+      "title": "Atomic Design",
+      "description": "Component library organized as atoms, molecules, and organisms for maximum reusability.",
+      "icon": "⚛️"
+    },
+    {
+      "title": "Multi-Brand Support",
+      "description": "Scale to multiple brands by swapping design token files. Same components, different branding.",
+      "icon": "🎯"
+    },
+    {
+      "title": "Developer Experience",
+      "description": "Localhost preview with mock content. No HubSpot dependency during development.",
+      "icon": "⚡"
+    }
+  ],
+  "stats": [
+    {
+      "value": "< 2.5s",
+      "label": "Largest Contentful Paint"
+    },
+    {
+      "value": "< 100ms",
+      "label": "First Input Delay"
+    },
+    {
+      "value": "< 0.1",
+      "label": "Cumulative Layout Shift"
+    }
+  ]
+}
