@@ -1,0 +1,52 @@
+[
+  {
+    "id": "variant",
+    "name": "variant",
+    "label": "Card Variant",
+    "required": false,
+    "locked": false,
+    "type": "choice",
+    "choices": [
+      ["default", "Default"],
+      ["bordered", "Bordered"],
+      ["elevated", "Elevated"]
+    ],
+    "default": "default"
+  },
+  {
+    "id": "title",
+    "name": "title",
+    "label": "Card Title",
+    "required": false,
+    "locked": false,
+    "type": "text",
+    "default": "Card Title"
+  },
+  {
+    "id": "content",
+    "name": "content",
+    "label": "Card Content",
+    "required": false,
+    "locked": false,
+    "type": "rich_text",
+    "default": "<p>Card content goes here...</p>"
+  },
+  {
+    "id": "show_footer",
+    "name": "show_footer",
+    "label": "Show Footer",
+    "required": false,
+    "locked": false,
+    "type": "boolean",
+    "default": false
+  },
+  {
+    "id": "footer_text",
+    "name": "footer_text",
+    "label": "Footer Text",
+    "required": false,
+    "locked": false,
+    "type": "text",
+    "default": "Footer content"
+  }
+]

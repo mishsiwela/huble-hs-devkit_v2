@@ -1,0 +1,121 @@
+/* React Component Styles */
+/* Server-rendered React components using design tokens */
+/* These styles match the Tailwind classes from the React components */
+
+/* Card Component */
+.huble-card {
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.huble-card--default {
+  background-color: white;
+}
+
+.huble-card--bordered {
+  background-color: white;
+  border: 1px solid var(--color-gray-200);
+}
+
+.huble-card--elevated {
+  background-color: white;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.huble-card__header {
+  padding: var(--spacing-6) var(--spacing-6) var(--spacing-4);
+  border-bottom: 1px solid var(--color-gray-200);
+}
+
+.huble-card__body {
+  padding: var(--spacing-6);
+}
+
+.huble-card__footer {
+  padding: var(--spacing-6);
+  border-top: 1px solid var(--color-gray-200);
+  background-color: var(--color-gray-50);
+}
+
+/* Hero Component */
+.huble-hero {
+  position: relative;
+  padding: var(--spacing-16) var(--spacing-4);
+}
+
+@media (min-width: 640px) {
+  .huble-hero {
+    padding-left: var(--spacing-6);
+    padding-right: var(--spacing-6);
+  }
+}
+
+@media (min-width: 1024px) {
+  .huble-hero {
+    padding-left: var(--spacing-8);
+    padding-right: var(--spacing-8);
+  }
+}
+
+.huble-hero__container {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.huble-hero__grid--with-image {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-12);
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .huble-hero__grid--with-image {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.huble-hero__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+}
+
+.huble-hero__heading {
+  font-size: var(--fontSize-4xl);
+  font-weight: var(--fontWeight-bold);
+  color: var(--color-gray-900);
+  line-height: var(--lineHeight-tight);
+}
+
+@media (min-width: 640px) {
+  .huble-hero__heading {
+    font-size: var(--fontSize-5xl);
+  }
+}
+
+.huble-hero__description {
+  font-size: var(--fontSize-xl);
+  color: var(--color-gray-600);
+  line-height: var(--lineHeight-relaxed);
+}
+
+.huble-hero__cta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+@media (min-width: 640px) {
+  .huble-hero__cta {
+    flex-direction: row;
+  }
+}
+
+.huble-hero__image {
+  border-radius: 0.5rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  width: 100%;
+  height: auto;
+}

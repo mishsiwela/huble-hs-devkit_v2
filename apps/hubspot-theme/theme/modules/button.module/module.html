@@ -1,16 +1,16 @@
-{# Thin adapter: Maps HubSpot fields → React props #}
-{# Progressive enhancement: Works without JS, enhanced with React #}
-<div id="button-{{ name }}"
-     data-component="Button"
-     data-props='{{ {
-       "children": module.label,
-       "variant": module.variant,
-       "size": module.size,
-       "fullWidth": module.full_width
-     } | tojson }}'
-     data-href="{{ module.href }}">
-  {# Fallback content - simple link that gets replaced by React #}
-  <a href="{{ module.href }}" class="huble-button huble-button--{{ module.variant }} huble-button--{{ module.size }}{% if module.full_width %} huble-button--full{% endif %}">
-    {{ module.label }}
-  </a>
-</div>
+{# Button Module - Zero Duplication React Component Reuse #}
+{# This module uses the SAME Button component from packages/ui/ #}
+{# Server-rendered in HubSpot, optionally hydrated for interactivity #}
+
+{% import "../../templates/macros/react-components.html" as components %}
+
+{# Render Button component directly - same atoms/molecules used in React #}
+{{ components.Button({
+  label: module.label,
+  children: module.label,
+  variant: module.variant,
+  size: module.size,
+  fullWidth: module.full_width,
+  href: module.href,
+  interactive: false
+}) }}

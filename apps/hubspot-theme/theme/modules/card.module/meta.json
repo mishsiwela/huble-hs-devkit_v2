@@ -1,0 +1,7 @@
+{
+  "label": "Card",
+  "host_template_types": ["PAGE", "BLOG_POST", "BLOG_LISTING"],
+  "icon": "📇",
+  "is_available_for_new_content": true,
+  "description": "Card component with header, body, and optional footer"
+}

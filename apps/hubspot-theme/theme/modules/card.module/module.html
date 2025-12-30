@@ -1,0 +1,26 @@
+{# Card Module - Zero Duplication React Component Reuse #}
+{# This module uses the SAME Card component from packages/ui/ #}
+{# Server-rendered in HubSpot - static component #}
+
+{% import "../../templates/macros/react-components.html" as components %}
+
+{# Render Card component directly - same molecules used in React #}
+{% call components.Card({
+  variant: module.variant
+}) %}
+  {% if module.title %}
+    {% call components.CardHeader({}) %}
+      <h3>{{ module.title }}</h3>
+    {% endcall %}
+  {% endif %}
+
+  {% call components.CardBody({}) %}
+    {{ module.content|safe }}
+  {% endcall %}
+
+  {% if module.show_footer %}
+    {% call components.CardFooter({}) %}
+      {{ module.footer_text }}
+    {% endcall %}
+  {% endif %}
+{% endcall %}

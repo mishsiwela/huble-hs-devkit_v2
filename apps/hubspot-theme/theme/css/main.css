@@ -4,6 +4,9 @@
 /* Import component fallback styles */
 @import './components.css';
 
+/* Import React component styles (server-rendered) */
+@import './react-components.css';
+
 /* Base styles */
 *,
 *::before,
