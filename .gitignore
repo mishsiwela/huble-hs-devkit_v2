@@ -39,3 +39,4 @@ Thumbs.db
 # Build artifacts
 *.bundle.js
 *.bundle.css
+storybook-static
