@@ -1,0 +1,36 @@
+{# Thin adapter: Maps HubSpot fields → React props #}
+<div id="hero-{{ name }}"
+     data-component="Hero"
+     data-props='{{ {
+       "heading": module.heading,
+       "description": module.description,
+       "imageSrc": module.image.src,
+       "imageAlt": module.image.alt,
+       "imagePosition": module.image_position
+     } | tojson }}'>
+</div>
+
+{# Server-rendered fallback (no-JS) #}
+<noscript>
+  <section class="relative py-16 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+      <div class="{% if module.image.src %}grid grid-cols-1 lg:grid-cols-2 gap-12 items-center{% endif %}">
+        <div class="space-y-6" {% if module.image_position == 'left' %}style="order: 2"{% endif %}>
+          <h1 class="text-4xl font-bold text-gray-900 sm:text-5xl lg:text-6xl">
+            {{ module.heading }}
+          </h1>
+          {% if module.description %}
+          <p class="text-xl text-gray-600">{{ module.description }}</p>
+          {% endif %}
+        </div>
+        {% if module.image.src %}
+        <div {% if module.image_position == 'left' %}style="order: 1"{% endif %}>
+          <img src="{{ module.image.src }}"
+               alt="{{ module.image.alt }}"
+               class="rounded-lg shadow-2xl w-full h-auto">
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+</noscript>

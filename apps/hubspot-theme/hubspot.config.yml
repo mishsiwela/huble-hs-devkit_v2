@@ -1,0 +1,17 @@
+# HubSpot CLI Configuration
+# Add your portal credentials using: hs auth
+
+defaultPortal: default
+
+portals:
+  - name: default
+    portalId: YOUR_PORTAL_ID
+    authType: personalaccesskey
+    auth:
+      tokenInfo:
+        accessToken: YOUR_ACCESS_TOKEN
+
+# Upload settings
+upload:
+  src: ./theme
+  dest: huble-devkit-theme

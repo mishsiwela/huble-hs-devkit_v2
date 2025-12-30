@@ -1,0 +1,46 @@
+[
+  {
+    "id": "heading",
+    "name": "heading",
+    "label": "Heading",
+    "required": true,
+    "locked": false,
+    "type": "text",
+    "default": "Welcome to Our Site"
+  },
+  {
+    "id": "description",
+    "name": "description",
+    "label": "Description",
+    "required": false,
+    "locked": false,
+    "type": "textarea",
+    "default": "Discover amazing features and services"
+  },
+  {
+    "id": "image",
+    "name": "image",
+    "label": "Hero Image",
+    "required": false,
+    "locked": false,
+    "type": "image",
+    "default": {
+      "src": "",
+      "alt": "Hero image"
+    }
+  },
+  {
+    "id": "image_position",
+    "name": "image_position",
+    "label": "Image Position",
+    "required": false,
+    "locked": false,
+    "type": "choice",
+    "choices": [
+      ["left", "Left"],
+      ["right", "Right"],
+      ["background", "Background"]
+    ],
+    "default": "right"
+  }
+]

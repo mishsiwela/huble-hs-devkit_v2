@@ -1,0 +1,27 @@
+{
+  "label": "Huble Developer Kit Theme",
+  "author": {
+    "name": "Huble",
+    "email": "dev@huble.com",
+    "url": "https://huble.com"
+  },
+  "preview_path": "./templates/home.html",
+  "screenshot_path": "./images/screenshot.png",
+  "template_path": "./templates",
+  "css_path": "./css",
+  "js_path": "./js",
+  "responsive_breakpoints": [
+    {
+      "name": "mobile",
+      "mediaQuery": "(max-width: 767px)"
+    },
+    {
+      "name": "tablet",
+      "mediaQuery": "(min-width: 768px) and (max-width: 1023px)"
+    },
+    {
+      "name": "desktop",
+      "mediaQuery": "(min-width: 1024px)"
+    }
+  ]
+}

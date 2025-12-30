@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ content.html_title }}</title>
+
+  <!-- Design tokens and styles -->
+  {{ standard_header_includes }}
+  <link rel="stylesheet" href="{{ get_asset_url('./css/tokens.css') }}">
+  <link rel="stylesheet" href="{{ get_asset_url('./css/main.css') }}">
+</head>
+<body>
+  <!-- Main content area where modules will be added -->
+  <main>
+    {% dnd_area "main_content" %}
+      {% dnd_section %}
+        {% dnd_module path="@hubspot/rich_text" %}
+          {% module_attribute "html" %}
+            <h1>Welcome to Huble Developer Kit</h1>
+            <p>Add modules from the sidebar to build your page.</p>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_section %}
+    {% end_dnd_area %}
+  </main>
+
+  <!-- React and ReactDOM from CDN for island hydration -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+  <!-- Module scripts -->
+  {{ standard_footer_includes }}
+</body>
+</html>

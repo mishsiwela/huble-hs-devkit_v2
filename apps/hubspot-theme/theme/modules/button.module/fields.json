@@ -1,0 +1,59 @@
+[
+  {
+    "id": "label",
+    "name": "label",
+    "label": "Button Label",
+    "required": true,
+    "locked": false,
+    "type": "text",
+    "default": "Click me"
+  },
+  {
+    "id": "variant",
+    "name": "variant",
+    "label": "Button Variant",
+    "required": false,
+    "locked": false,
+    "type": "choice",
+    "choices": [
+      ["primary", "Primary"],
+      ["secondary", "Secondary"],
+      ["outline", "Outline"],
+      ["ghost", "Ghost"],
+      ["destructive", "Destructive"]
+    ],
+    "default": "primary"
+  },
+  {
+    "id": "size",
+    "name": "size",
+    "label": "Button Size",
+    "required": false,
+    "locked": false,
+    "type": "choice",
+    "choices": [
+      ["sm", "Small"],
+      ["md", "Medium"],
+      ["lg", "Large"]
+    ],
+    "default": "md"
+  },
+  {
+    "id": "full_width",
+    "name": "full_width",
+    "label": "Full Width",
+    "required": false,
+    "locked": false,
+    "type": "boolean",
+    "default": false
+  },
+  {
+    "id": "href",
+    "name": "href",
+    "label": "Link URL",
+    "required": false,
+    "locked": false,
+    "type": "url",
+    "default": "#"
+  }
+]
