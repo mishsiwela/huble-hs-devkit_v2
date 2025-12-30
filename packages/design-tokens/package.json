@@ -1,0 +1,13 @@
+{
+  "name": "@huble/design-tokens",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./build/tokens.ts",
+  "types": "./build/tokens.ts",
+  "scripts": {
+    "build": "tsx scripts/generate-tokens.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2"
+  }
+}

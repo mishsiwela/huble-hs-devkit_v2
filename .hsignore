@@ -1,0 +1,49 @@
+# Exclude source code and development files from HubSpot Design Manager uploads
+
+# Own Documentation
+.own-docs/
+
+# Source packages
+packages/
+
+# Applications (only upload built theme)
+apps/storybook/
+apps/local-preview/
+
+# Dependencies
+node_modules/
+
+# Version Control
+.git/
+.github/
+
+# Build System
+.turbo/
+turbo.json
+pnpm-workspace.yaml
+pnpm-lock.yaml
+
+# Config Files
+tsconfig.json
+.prettierrc
+.eslintrc*
+
+# Source Files
+*.ts
+*.tsx
+src/
+scripts/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment
+.env
+.env.*
+
+# IDE
+.vscode/
+.idea/
