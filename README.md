@@ -372,8 +372,6 @@ cd apps/hubspot-theme && hs upload theme
 
 ## 📚 Additional Resources
 
-- [FRESH_START_EXECUTION_PROMPT.md](.own-docs/FRESH_START_EXECUTION_PROMPT.md) - Full implementation guide
-- [SDLC Workflow](.own-docs/Editable-SDLC-workflow.md) - Development lifecycle
 - [HubSpot CMS Docs](https://developers.hubspot.com/docs/cms)
 - [Tailwind CSS](https://tailwindcss.com)
 - [Storybook](https://storybook.js.org)
