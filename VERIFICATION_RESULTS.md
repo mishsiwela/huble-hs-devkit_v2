@@ -485,11 +485,11 @@ The following require HubSpot portal access or live browser testing:
 
 All detailed testing procedures and requirements verification available in:
 
-- **`.own-docs/TESTING_GUIDE.md`** - Step-by-step testing procedures (23 tests)
-- **`.own-docs/REQUIREMENTS_VERIFICATION.md`** - Complete requirements checklist
-- **`.own-docs/TRUE_ZERO_DUPLICATION.md`** - Architecture explanation (200+ lines)
-- **`.own-docs/ARCHITECTURE_VALIDATION.md`** - Implementation validation
-- **`VERIFICATION_RESULTS.md`** - This summary document
+- **`.spec-docs/TESTING_GUIDE.md`** - Step-by-step testing procedures (23 tests)
+- **`.spec-docs/REQUIREMENTS_VERIFICATION.md`** - Complete requirements checklist
+- **`.spec-docs/TRUE_ZERO_DUPLICATION.md`** - Architecture explanation (200+ lines)
+- **`.spec-docs/ARCHITECTURE_VALIDATION.md`** - Implementation validation
+- **`.VERIFICATION_RESULTS.md`** - This summary document
 
 ---
 
