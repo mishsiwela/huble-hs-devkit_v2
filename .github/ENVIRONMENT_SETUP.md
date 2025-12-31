@@ -6,6 +6,17 @@ This project uses GitHub Environments for deployment to HubSpot:
 - **Staging**: Automatic deployment from `develop` branch
 - **Production**: Manual deployment via tags or workflow dispatch
 
+**For detailed branching strategy and justification, see [BRANCHING_STRATEGY.md](./BRANCHING_STRATEGY.md)**
+
+### Why Two Branches (Not Three)?
+
+This project uses a **two-branch strategy** (develop + main) with environment-based deployments:
+- ✅ **Not over-engineering**: No redundant staging branch
+- ✅ **5 quality gates**: CI, code review, staging environment, approval, monitoring
+- ✅ **Best practice**: Industry-standard GitFlow-lite approach
+
+A third `staging` branch would add merge overhead without additional bug prevention.
+
 ## Setup Instructions
 
 ### 1. Create GitHub Environments
