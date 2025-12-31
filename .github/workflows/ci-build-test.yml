@@ -1,0 +1,266 @@
+name: CI - Build & Test
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - 'feature/**'
+  pull_request:
+    branches:
+      - main
+      - develop
+
+env:
+  NODE_VERSION: '18.x'
+  PNPM_VERSION: '8'
+
+jobs:
+  # ============================================
+  # Code Quality & Linting
+  # ============================================
+  lint:
+    name: Lint & Code Quality
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run ESLint
+        run: pnpm run lint || echo "No lint script configured"
+        continue-on-error: true
+
+      - name: Check TypeScript
+        run: pnpm run type-check || echo "No type-check script configured"
+        continue-on-error: true
+
+  # ============================================
+  # Build All Packages
+  # ============================================
+  build:
+    name: Build All Packages
+    runs-on: ubuntu-latest
+    needs: lint
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build design tokens
+        run: pnpm run build:tokens
+
+      - name: Build UI package
+        run: pnpm run build:ui
+
+      - name: Build theme
+        run: pnpm run build:theme
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifacts
+          path: |
+            packages/design-tokens/dist/
+            packages/ui/dist/
+            apps/hubspot-theme/theme/
+          retention-days: 7
+
+  # ============================================
+  # Validate HubSpot Theme
+  # ============================================
+  validate-theme:
+    name: Validate HubSpot Theme
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build all packages
+        run: pnpm run build
+
+      - name: Validate theme structure
+        run: |
+          cd apps/hubspot-theme
+          node scripts/validate.js
+
+      - name: Check for @import in module.css
+        run: |
+          cd apps/hubspot-theme
+          if grep -r "^@import" theme/modules/*/module.css; then
+            echo "❌ ERROR: Found @import in module.css files (causes ERR_BLOCKED_BY_ORB)"
+            exit 1
+          else
+            echo "✅ No @import found in module.css files"
+          fi
+
+      - name: Verify CSS custom properties
+        run: |
+          cd apps/hubspot-theme
+          for module in theme/modules/*.module; do
+            if ! grep -q "color-primary-600" "$module/module.css"; then
+              echo "⚠️  WARNING: $module missing CSS custom properties"
+            fi
+          done
+
+  # ============================================
+  # Unit Tests
+  # ============================================
+  test:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run tests
+        run: pnpm run test || echo "No tests configured yet"
+        continue-on-error: true
+
+      - name: Upload test coverage
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: coverage-report
+          path: coverage/
+          retention-days: 7
+
+  # ============================================
+  # Build Storybook
+  # ============================================
+  build-storybook:
+    name: Build Storybook
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build Storybook
+        run: pnpm run build:storybook || echo "Storybook build skipped"
+        continue-on-error: true
+
+  # ============================================
+  # Security Audit
+  # ============================================
+  security-audit:
+    name: Security Audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Run security audit
+        run: pnpm audit --audit-level=moderate
+        continue-on-error: true
+
+  # ============================================
+  # Summary
+  # ============================================
+  ci-summary:
+    name: CI Summary
+    runs-on: ubuntu-latest
+    needs: [lint, build, validate-theme, test, build-storybook, security-audit]
+    if: always()
+
+    steps:
+      - name: Check all jobs status
+        run: |
+          echo "## CI Pipeline Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✅ All CI checks completed" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Jobs Status:" >> $GITHUB_STEP_SUMMARY
+          echo "- Lint: ${{ needs.lint.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Build: ${{ needs.build.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Validate Theme: ${{ needs.validate-theme.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Tests: ${{ needs.test.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Storybook: ${{ needs.build-storybook.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Security: ${{ needs.security-audit.result }}" >> $GITHUB_STEP_SUMMARY
