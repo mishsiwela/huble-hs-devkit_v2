@@ -69,6 +69,32 @@ function checkModules() {
       }
     });
 
+    // Check for module.css - critical for CSS custom properties to load
+    const cssPath = path.join(moduleDir, 'module.css');
+    if (!fs.existsSync(cssPath)) {
+      errors.push(
+        `${moduleName}: Missing module.css - required for CSS tokens to load in HubSpot`
+      );
+    } else {
+      const cssContent = fs.readFileSync(cssPath, 'utf-8');
+
+      // Check for @import statements (causes ERR_BLOCKED_BY_ORB)
+      // Match @import followed by whitespace/url (not in comments)
+      const hasImportDirective = /^@import\s+/m.test(cssContent);
+      if (hasImportDirective) {
+        errors.push(
+          `${moduleName}: module.css uses @import which causes ERR_BLOCKED_BY_ORB errors. CSS must be inlined.`
+        );
+      }
+
+      // Verify CSS custom properties are defined
+      if (!cssContent.includes('--color-primary-600')) {
+        warnings.push(
+          `${moduleName}: module.css doesn't define CSS custom properties - design tokens may not work`
+        );
+      }
+    }
+
     // Check fields.json structure
     const fieldsPath = path.join(moduleDir, 'fields.json');
     if (fs.existsSync(fieldsPath)) {

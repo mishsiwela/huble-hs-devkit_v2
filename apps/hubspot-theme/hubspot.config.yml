@@ -1,17 +1,17 @@
-# HubSpot CLI Configuration
-# Add your portal credentials using: hs auth
-
-defaultPortal: default
-
-portals:
-  - name: default
-    portalId: YOUR_PORTAL_ID
-    authType: personalaccesskey
-    auth:
-      tokenInfo:
-        accessToken: YOUR_ACCESS_TOKEN
-
-# Upload settings
+defaultPortal: sm-own
 upload:
   src: ./theme
   dest: huble-devkit-theme
+portals:
+  - name: sm-own
+    portalId: 147382733
+    env: prod
+    authType: personalaccesskey
+    personalAccessKey: >-
+      CiRldTEtZGNiMC0zMGUxLTRhYjUtODRkNS04Y2ZhNDgxZjI0ZjkQzcOjRhizovcoKhkABeaRgqWSGzOEYD91m7xKkY7P-ZRPLncHSgNldTE
+    auth:
+      tokenInfo:
+        accessToken: >-
+          CNaG-vu2MxIsQlNQMl8kQEwrAh8ACAkCARMXAQEBAgECAwENAwoBAgMHGwEBAQEkAhwBWwEYzcOjRiCzovcoKO7pDDIU-ctYFbnfkb1jQYpqFErJkPkJ09U6pAFCU1AyXyRATCsCTAAQEwYABgAdAAEAAQABAFEAKwAcAAEAAQABAAEADwABAAEABAAFAAEAAQABAAEABAABAAUAAQABAAEACAABAAYABQABABAABAAPAAEACAAEAAEAAQABAAEAAQAEAAEABQABABIACQADAAEAMQABAAEAAQAEAAEAAQABAAEAAQABAAEAAQBBAAEABwAXAAEAQgAaAAEAOQEBAEIUDYX7UJQgcd7nhdTgTr46LXevfjJKA2V1MVIAWgBgAWizovcocAB4AA
+        expiresAt: '2025-12-30T13:42:00.823Z'
+    accountType: STANDARD

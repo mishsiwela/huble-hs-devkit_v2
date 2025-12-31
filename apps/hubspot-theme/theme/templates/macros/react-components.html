@@ -17,13 +17,13 @@
   - Optional client-side hydration via interactive prop
   - Zero JavaScript for static components
 
-  Generated: 2025-12-30T10:56:48.316Z
+  Generated: 2025-12-31T11:03:35.013Z
 #}
 
 {# ========== Button Component ========== #}
 {% macro Button(props) %}
-  {# Auto-generated from React Button component via SSR #}
-  {# This macro produces identical HTML to the React component #}
+  {# Uses BEM classes from components.css which leverage design tokens #}
+  {# This ensures button styling works in HubSpot without Tailwind #}
 
   {% set variant = props.variant|default('primary') %}
   {% set size = props.size|default('md') %}
@@ -38,18 +38,17 @@
     <div class="react-island"
          data-component="Button"
          data-props='{{ props | tojson }}'>
-      {# Server-rendered fallback - works without JS #}
-      <button class="inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50 {% if variant == 'primary' %}bg-blue-600 text-white hover:bg-blue-700{% elif variant == 'secondary' %}bg-purple-600 text-white hover:bg-purple-700{% elif variant == 'outline' %}border border-gray-300 bg-transparent hover:bg-gray-100{% elif variant == 'ghost' %}hover:bg-gray-100{% elif variant == 'destructive' %}bg-red-600 text-white hover:bg-red-700{% endif %} {% if size == 'sm' %}text-sm px-3 py-1.5{% elif size == 'md' %}text-base px-4 py-2{% elif size == 'lg' %}text-lg px-6 py-3{% endif %}{% if fullWidth %} w-full{% endif %}"
+      {# Server-rendered fallback using BEM classes with design tokens #}
+      <button class="huble-button huble-button--{{ variant }} huble-button--{{ size }}{% if fullWidth %} huble-button--full{% endif %}"
               type="{{ props.type|default('button') }}"
               {% if disabled %}disabled{% endif %}>
         {{ children }}
       </button>
     </div>
   {% else %}
-    {# Islands Architecture: Static mode - server-rendered only, no hydration #}
-    {# Renders as link for navigation (better for SEO and Core Web Vitals) #}
+    {# Static mode - server-rendered only, using BEM classes with design tokens #}
     <a href="{{ href }}"
-       class="inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 {% if variant == 'primary' %}bg-blue-600 text-white hover:bg-blue-700{% elif variant == 'secondary' %}bg-purple-600 text-white hover:bg-purple-700{% elif variant == 'outline' %}border border-gray-300 bg-transparent hover:bg-gray-100{% elif variant == 'ghost' %}hover:bg-gray-100{% elif variant == 'destructive' %}bg-red-600 text-white hover:bg-red-700{% endif %} {% if size == 'sm' %}text-sm px-3 py-1.5{% elif size == 'md' %}text-base px-4 py-2{% elif size == 'lg' %}text-lg px-6 py-3{% endif %}{% if fullWidth %} w-full{% endif %}"
+       class="huble-button huble-button--{{ variant }} huble-button--{{ size }}{% if fullWidth %} huble-button--full{% endif %}"
        {% if props.target %}target="{{ props.target }}"{% endif %}>
       {{ children }}
     </a>
@@ -59,32 +58,33 @@
 {# ========== Card Components ========== #}
 {% macro Card(props) %}
   {# Auto-generated from React Card component via SSR #}
+  {# Uses BEM classes from react-components.css which leverage design tokens #}
 
   {% set variant = props.variant|default('default') %}
 
   {# Server-rendered Card - no JavaScript needed (Islands: static by default) #}
-  <div class="rounded-lg border bg-white text-gray-950 shadow-sm {% if variant == 'elevated' %}shadow-lg{% elif variant == 'outlined' %}border-2{% endif %}">
+  <div class="huble-card huble-card--{{ variant }}">
     {{ caller() }}
   </div>
 {% endmacro %}
 
 {% macro CardHeader(props) %}
   {# Auto-generated from React CardHeader component #}
-  <div class="flex flex-col space-y-1.5 p-6">
+  <div class="huble-card__header">
     {{ caller() }}
   </div>
 {% endmacro %}
 
 {% macro CardBody(props) %}
   {# Auto-generated from React CardBody component #}
-  <div class="p-6 pt-0">
+  <div class="huble-card__body">
     {{ caller() }}
   </div>
 {% endmacro %}
 
 {% macro CardFooter(props) %}
   {# Auto-generated from React CardFooter component #}
-  <div class="flex items-center p-6 pt-0">
+  <div class="huble-card__footer">
     {{ caller() }}
   </div>
 {% endmacro %}
@@ -92,6 +92,7 @@
 {# ========== Hero Component ========== #}
 {% macro Hero(props) %}
   {# Auto-generated from React Hero component via SSR #}
+  {# Uses BEM classes from react-components.css which leverage design tokens #}
 
   {% set heading = props.heading|default('') %}
   {% set description = props.description|default('') %}
@@ -100,35 +101,32 @@
   {% set imagePosition = props.imagePosition|default('right') %}
 
   {# Server-rendered Hero - static HTML for Core Web Vitals (Islands: static) #}
-  <section class="w-full py-12 md:py-24 lg:py-32">
-    <div class="container px-4 md:px-6">
-      <div class="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
+  <section class="huble-hero">
+    <div class="huble-hero__container">
+      <div class="huble-hero__grid--with-image">
         {# Content section - order changes based on image position #}
-        <div class="flex flex-col justify-center space-y-4"
+        <div class="huble-hero__content"
              style="order: {% if imagePosition == 'left' %}2{% else %}1{% endif %}">
-          <div class="space-y-2">
-            <h1 class="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl">
-              {{ heading }}
-            </h1>
-            {% if description %}
-              <p class="max-w-[600px] text-gray-500 md:text-xl">
-                {{ description }}
-              </p>
-            {% endif %}
-          </div>
+          <h1 class="huble-hero__heading">
+            {{ heading }}
+          </h1>
+          {% if description %}
+            <p class="huble-hero__description">
+              {{ description }}
+            </p>
+          {% endif %}
           {# CTA buttons area #}
-          <div class="flex flex-col gap-2 min-[400px]:flex-row">
+          <div class="huble-hero__cta">
             {{ caller() }}
           </div>
         </div>
 
         {# Image section #}
         {% if imageSrc %}
-          <div class="flex items-center justify-center"
-               style="order: {% if imagePosition == 'left' %}1{% else %}2{% endif %}">
+          <div style="order: {% if imagePosition == 'left' %}1{% else %}2{% endif %}">
             <img src="{{ imageSrc }}"
                  alt="{{ imageAlt }}"
-                 class="aspect-video overflow-hidden rounded-xl object-cover object-center"
+                 class="huble-hero__image"
                  width="550"
                  height="310"
                  loading="lazy">
