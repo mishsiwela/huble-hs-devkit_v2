@@ -5,9 +5,11 @@
   "main": "./build/tokens.ts",
   "types": "./build/tokens.ts",
   "scripts": {
-    "build": "tsx scripts/generate-tokens.ts"
+    "build": "tsx scripts/generate-tokens.ts",
+    "dev": "tsx scripts/watch-tokens.ts"
   },
   "devDependencies": {
+    "chokidar": "^4.0.3",
     "tsx": "^4.19.2"
   }
 }

@@ -5,6 +5,11 @@
   "description": "Modern React + HubSpot CMS development framework",
   "scripts": {
     "dev": "turbo run dev",
+    "dev:all": "pnpm run dev",
+    "dev:tokens": "pnpm --filter design-tokens dev",
+    "dev:ui": "pnpm --filter ui dev",
+    "dev:preview": "pnpm --filter local-preview dev",
+    "dev:storybook": "pnpm --filter storybook dev",
     "build": "turbo run build",
     "build:tokens": "pnpm --filter design-tokens build",
     "build:ui": "pnpm --filter ui build",

@@ -6,6 +6,7 @@ import colors from '../src/colors.json';
 import spacing from '../src/spacing.json';
 import typography from '../src/typography.json';
 import breakpoints from '../src/breakpoints.json';
+import effects from '../src/effects.json';
 
 // Ensure build directory exists
 const buildDir = path.join(__dirname, '../build');
@@ -42,6 +43,16 @@ function generateCSS() {
     css += `  --breakpoint-${key}: ${value};\n`;
   });
 
+  // Border Radius
+  Object.entries(effects.borderRadius).forEach(([key, value]) => {
+    css += `  --radius-${key}: ${value};\n`;
+  });
+
+  // Box Shadows
+  Object.entries(effects.boxShadow).forEach(([key, value]) => {
+    css += `  --shadow-${key}: ${value};\n`;
+  });
+
   css += '}\n';
 
   fs.writeFileSync(path.join(buildDir, 'tokens.css'), css);
@@ -54,6 +65,8 @@ function generateTS() {
     spacing: spacing.spacing,
     typography: typography,
     breakpoints: breakpoints.breakpoint,
+    borderRadius: effects.borderRadius,
+    boxShadow: effects.boxShadow,
   };
 
   const ts = `export const tokens = ${JSON.stringify(tokens, null, 2)} as const;\n`;

@@ -35,6 +35,8 @@ Thumbs.db
 
 # HubSpot
 .hubspot/
+**/hubspot.config.yml
+archived.hubspot.config.yml
 
 # Build artifacts
 *.bundle.js

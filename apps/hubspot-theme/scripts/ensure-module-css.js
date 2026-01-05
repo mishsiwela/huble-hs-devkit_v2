@@ -47,8 +47,20 @@ function determineRequiredCSS(moduleName, moduleHtmlContent) {
 
 /**
  * Read CSS file content
+ * For tokens.css, always read from the SOURCE OF TRUTH in design-tokens package
  */
 function readCSSFile(cssFileName) {
+  if (cssFileName === 'tokens.css') {
+    // CRITICAL: Read from source of truth, not the copied file
+    // This ensures we always have the latest design tokens
+    const tokensSourcePath = path.join(__dirname, '../../../packages/design-tokens/build/tokens.css');
+    if (fs.existsSync(tokensSourcePath)) {
+      return fs.readFileSync(tokensSourcePath, 'utf-8');
+    }
+    console.warn('⚠️  Warning: Source tokens.css not found. Build design-tokens first: pnpm run build:tokens');
+    return '';
+  }
+
   const cssPath = path.join(__dirname, '../theme/css', cssFileName);
   if (fs.existsSync(cssPath)) {
     return fs.readFileSync(cssPath, 'utf-8');
